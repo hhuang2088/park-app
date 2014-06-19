@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Spot, :type => :model do
+# RSpec.describe Spot, :type => :model do
   
   describe Spot do 
     it "should be created with required parameters" do 
@@ -23,4 +23,4 @@ RSpec.describe Spot, :type => :model do
       spot.should be_valid 
     end
   end
-end
+# end
