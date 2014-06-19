@@ -29,9 +29,6 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
-    better_errors (1.1.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -107,6 +104,10 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
     rspec-core (3.0.1)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.1)
@@ -163,7 +164,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  better_errors
   coffee-rails (~> 4.0.0)
   devise
   factory_girl
@@ -175,7 +175,8 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   rails (= 4.1.1)
-  rspec-rails
+  rspec
+  rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring

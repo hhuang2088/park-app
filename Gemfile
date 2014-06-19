@@ -30,8 +30,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'factory_girl'
-  gem 'rspec-rails'
-  gem 'better_errors'
+  gem 'rspec'
+  gem 'rspec-rails', '~> 3.0.0'
+  # gem 'better_errors'
 end
 
 group :production do 
