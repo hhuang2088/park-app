@@ -1,4 +1,3 @@
-"use strict"
 initialize = ->
 
   startLocation = (position) ->
@@ -14,12 +13,14 @@ initialize = ->
 
     marker = new google.maps.Marker(
       map: map
-      position: new google.maps.LatLng(latitude, longitude),
+      draggable: true
+      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
       # animation: google.maps.Animation.DROP
       )
 
     google.maps.event.addListener(map, 'center_changed', ->
-      console.log(map.getCenter())
+      console.log("#{map.getCenter().k}, #{map.getCenter().A}")
+      marker.setPosition(map.getCenter())
       )
 
   if navigator.geolocation
