@@ -1,3 +1,4 @@
+"use strict"
 initialize = ->
 
   startLocation = (position) ->
@@ -11,16 +12,19 @@ initialize = ->
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
     # console.log(map)
 
+    marker = new google.maps.Marker(
+      map: map
+      position: new google.maps.LatLng(latitude, longitude),
+      # animation: google.maps.Animation.DROP
+      )
+
+    google.maps.event.addListener(map, 'center_changed', ->
+      console.log(map.getCenter())
+      )
+
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(startLocation)
   else 
     console.log("Browser doesn't support geolocate")
-
-  # mapOptions = 
-  #   center: new google.maps.LatLng(latitude, longitude)
-  #   zoom: 5
-
-  # map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
-  # console.log(map)
 
 google.maps.event.addDomListener(window, 'load', initialize);
