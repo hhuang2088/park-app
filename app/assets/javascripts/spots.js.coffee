@@ -13,9 +13,8 @@ initialize = ->
 
     marker = new google.maps.Marker(
       map: map
-      draggable: true
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
-      # animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP
       )
 
     google.maps.event.addListener(map, 'center_changed', ->
@@ -23,9 +22,34 @@ initialize = ->
       marker.setPosition(map.getCenter())
       )
 
+    $('#park').on 'click', ->
+      
+      $.ajax
+        url: "/spots"
+        method: "post"
+        data:
+          "spot":
+            "latitude": map.getCenter().k
+            "longitude": map.getCenter().A
+        dataType: "json",
+        success: (data) ->
+          new google.maps.Marker(
+            map: map
+            position: new google.maps.LatLng(data.latitude, data.longitude)
+            animation: google.maps.Animation.DROP
+            )
+        error: ->
+          alert("Server is broken!")
+        # new google.maps.Marker(
+        #   map: map
+        #   position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
+        #   animation: google.maps.Animation.DROP)
+        # )
+
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(startLocation)
   else 
     console.log("Browser doesn't support geolocate")
+
 
 google.maps.event.addDomListener(window, 'load', initialize);

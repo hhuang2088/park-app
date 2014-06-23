@@ -9,5 +9,12 @@ body {
 }
 
 #map-canvas { 
-	height: 50% 
+	height: 50%;
+	width: 500px;
+	float: left;
+}
+
+#park {
+	height: 10%;
+	float: left;
 }

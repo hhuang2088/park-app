@@ -14,12 +14,35 @@ initialize = function() {
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     marker = new google.maps.Marker({
       map: map,
-      draggable: true,
-      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
+      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
+      animation: google.maps.Animation.DROP
     });
-    return google.maps.event.addListener(map, 'center_changed', function() {
+    google.maps.event.addListener(map, 'center_changed', function() {
       console.log("" + (map.getCenter().k) + ", " + (map.getCenter().A));
       return marker.setPosition(map.getCenter());
+    });
+    return $('#park').on('click', function() {
+      return $.ajax({
+        url: "/spots",
+        method: "post",
+        data: {
+          "spot": {
+            "latitude": map.getCenter().k,
+            "longitude": map.getCenter().A
+          }
+        },
+        dataType: "json",
+        success: function(data) {
+          return new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(data.latitude, data.longitude),
+            animation: google.maps.Animation.DROP
+          });
+        },
+        error: function() {
+          return alert("Server is broken!");
+        }
+      });
     });
   };
   if (navigator.geolocation) {
