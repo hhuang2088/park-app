@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.1'
 
 gem 'devise'
@@ -26,13 +25,11 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 group :development, :test do 
-  gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'factory_girl_rails'
-  gem 'rspec'
   gem 'rspec-rails', '~> 3.0.0'
-  # gem 'better_errors'
+  gem 'better_errors'
 end
 
 group :production do 
