@@ -15,6 +15,13 @@ class SpotsController < ApplicationController
 
   def create 
     @spot = current_user.spots.new(spot_params)
+    respond_to do |format|
+      if @spot.save
+        format.json { render json: @spot, status: :created}
+      else
+        format.json { render json: @spot.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def show 
