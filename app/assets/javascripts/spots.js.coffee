@@ -1,5 +1,4 @@
 initialize = ->
-
   startLocation = (position) ->
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
@@ -13,8 +12,7 @@ initialize = ->
 
     marker = new google.maps.Marker(
       map: map
-      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
-      animation: google.maps.Animation.DROP
+      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
       )
 
     google.maps.event.addListener(map, 'center_changed', ->
@@ -23,7 +21,6 @@ initialize = ->
       )
 
     $('#park').on 'click', ->
-      
       $.ajax
         url: "/spots"
         method: "post"
@@ -40,16 +37,10 @@ initialize = ->
             )
         error: ->
           alert("Server is broken!")
-        # new google.maps.Marker(
-        #   map: map
-        #   position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
-        #   animation: google.maps.Animation.DROP)
-        # )
 
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(startLocation)
   else 
     console.log("Browser doesn't support geolocate")
-
 
 google.maps.event.addDomListener(window, 'load', initialize);
