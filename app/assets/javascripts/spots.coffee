@@ -20,7 +20,7 @@ initialize = ->
       marker.setPosition(map.getCenter())
       )
 
-    $('#park').on 'click', ->
+    $('.park').on 'click', ->
       $.ajax
         url: "/spots"
         method: "post"
@@ -28,15 +28,35 @@ initialize = ->
           "spot":
             "latitude": map.getCenter().k
             "longitude": map.getCenter().A
-        dataType: "json",
+        dataType: "json"
         success: (data) ->
           new google.maps.Marker(
             map: map
             position: new google.maps.LatLng(data.latitude, data.longitude)
             animation: google.maps.Animation.DROP
+            icon: "http://www.infosnacks.com/img/icons/automobiles.png"
             )
+          $(".park").fadeOut()
+          $(".find").fadeIn()
         error: ->
           alert("Server is broken!")
+
+    $('.find').on 'click', ->
+      $.ajax
+        url: "/spots"
+        method: "get"
+        data: 
+          "spot":
+            "user_id": 1
+        dataType: "json"
+        success: (data) ->
+          console.log(data[1].latitude)
+          console.log(data[1].longitude)
+          $(".find").fadeOut()
+          $(".park").fadeIn()
+        error: ->
+          alert("Server is broken!")
+
 
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(startLocation)
