@@ -50,10 +50,21 @@ initialize = ->
             "user_id": 1
         dataType: "json"
         success: (data) ->
-          console.log(data[1].latitude)
-          console.log(data[1].longitude)
-          $(".find").fadeOut()
-          $(".park").fadeIn()
+          $.getJson('http://jsonp.guffa.com/Proxy.ashx?url=')
+            url: "https://maps.googleapis.com/maps/api/directions/json"
+            method: 'get'
+            data:
+              origin: "37.77139265936583,-122.40521395378113"
+              destination: "#{data[1].latitude},#{data[1].longitude}"
+              mode: "walking"
+              key: "AIzaSyAd5T-_NYteKlBbmFHnx5IMH2T5OoJGds4"
+            jsonpCallback: 'jsonCallback'
+            contentType: 'application/json'
+            dataType: 'jsonp'
+            success:  ->
+              console.log('Hello Directions')
+            error: ->
+
         error: ->
           alert("Server is broken!")
 
