@@ -4,7 +4,9 @@ var initialize;
 initialize = function() {
   var startLocation;
   startLocation = function(position) {
-    var getCar, latitude, longitude, map, mapOptions, marker;
+    var directionsDisplay, getCar, latitude, longitude, map, mapOptions, marker, markerOverlay;
+    markerOverlay = null;
+    directionsDisplay = null;
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
     mapOptions = {
@@ -31,13 +33,13 @@ initialize = function() {
         },
         dataType: "json",
         success: function(data) {
-          new google.maps.Marker({
+          markerOverlay = new google.maps.Marker({
             map: map,
             position: new google.maps.LatLng(data.latitude, data.longitude),
             animation: google.maps.Animation.DROP,
             icon: "http://www.infosnacks.com/img/icons/automobiles.png"
           });
-          $(".park").fadeOut();
+          $(".park").hide();
           return $(".find").fadeIn();
         },
         error: function() {
@@ -58,7 +60,7 @@ initialize = function() {
         success: function(data) {
           console.log("sucess!!!!!");
           getCar(data);
-          $(".find").fadeOut();
+          $(".find").hide();
           return $(".reset").fadeIn();
         },
         error: function() {
@@ -67,7 +69,7 @@ initialize = function() {
       });
     });
     getCar = function(data) {
-      var calculateRoute, center, directionsDisplay, directionsService;
+      var calculateRoute, center, directionsService;
       directionsService = new google.maps.DirectionsService();
       directionsDisplay = new google.maps.DirectionsRenderer();
       center = new google.maps.LatLng(latitude, longitude);
@@ -94,7 +96,11 @@ initialize = function() {
       return calculateRoute();
     };
     return $('.reset').on('click', function() {
-      return console.log('reset button clicked');
+      markerOverlay.setMap(null);
+      directionsDisplay.setMap(null);
+      map.setZoom(17);
+      $('.reset').hide();
+      return $('.park').fadeIn();
     });
   };
   if (navigator.geolocation) {
