@@ -57,7 +57,9 @@ initialize = function() {
         dataType: "json",
         success: function(data) {
           console.log("sucess!!!!!");
-          return getCar(data);
+          getCar(data);
+          $(".find").fadeOut();
+          return $(".reset").fadeIn();
         },
         error: function() {
           return alert("Server is broken!");
