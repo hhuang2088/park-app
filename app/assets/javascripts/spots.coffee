@@ -1,5 +1,7 @@
 initialize = ->
   startLocation = (position) ->
+    markerOverlay = null
+    directionsDisplay = null
     latitude = position.coords.latitude
     longitude = position.coords.longitude
     mapOptions = 
@@ -27,13 +29,13 @@ initialize = ->
             "longitude": map.getCenter().A
         dataType: "json"
         success: (data) ->
-          new google.maps.Marker(
+          markerOverlay = new google.maps.Marker(
             map: map
             position: new google.maps.LatLng(data.latitude, data.longitude)
             animation: google.maps.Animation.DROP
             icon: "http://www.infosnacks.com/img/icons/automobiles.png"
             )
-          $(".park").fadeOut()
+          $(".park").hide()
           $(".find").fadeIn()
         error: ->
           alert("Server is broken!")
@@ -49,7 +51,7 @@ initialize = ->
         success : (data) ->
           console.log("sucess!!!!!")
           getCar(data)
-          $(".find").fadeOut()
+          $(".find").hide()
           $(".reset").fadeIn()
         error : ->
           alert("Server is broken!")
@@ -58,7 +60,7 @@ initialize = ->
     getCar = (data)->
       directionsService = new google.maps.DirectionsService()
       directionsDisplay = new google.maps.DirectionsRenderer()
-      center = new google.maps.LatLng(latitude, longitude)
+      center = new google.maps.LatLng(latitude, longitude )
       mapOptions =
         zoom: 17
         center: center
@@ -77,7 +79,11 @@ initialize = ->
       calculateRoute()
 
     $('.reset').on('click', ->
-      console.log('reset button clicked'))
+      markerOverlay.setMap(null)
+      directionsDisplay.setMap(null)
+      map.setZoom(17)
+      $('.reset').hide()
+      $('.park').fadeIn())
 
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(startLocation)
