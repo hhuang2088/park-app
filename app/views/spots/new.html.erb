@@ -7,10 +7,16 @@
   </head>
   <body>
     <h1>Parking App</h1>
-    <button class="park">Park Me</button>
-    <button class="find">Find Car</button>
+    <% if current_user.parked == false %>
+      <button class="park">Park Me</button>
+      <button class="find" style="display: none;">Find Car</button>
+    <% else %>
+      <button class="park" style="display: none;">Park Car</button>
+      <button class="find">Find Car</button>
+    <% end %>
     <button class="reset">Reset</button>
     <div id="map-canvas"/><img src="http://www.greeningautocompany.com/images/loading-icon.gif"/></br></br>
     <div id="directions"></div>
+    <div id="user_id"
   </body>
 </html>
