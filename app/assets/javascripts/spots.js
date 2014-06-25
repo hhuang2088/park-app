@@ -4,7 +4,7 @@ var initialize;
 initialize = function() {
   var startLocation;
   startLocation = function(position) {
-    var latitude, longitude, map, mapOptions, marker;
+    var getCar, latitude, longitude, map, mapOptions, marker;
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
     mapOptions = {
@@ -17,7 +17,6 @@ initialize = function() {
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
     });
     google.maps.event.addListener(map, 'center_changed', function() {
-      console.log("" + (map.getCenter().k) + ", " + (map.getCenter().A));
       return marker.setPosition(map.getCenter());
     });
     $('.park').on('click', function() {
@@ -46,7 +45,7 @@ initialize = function() {
         }
       });
     });
-    return $('.find').on('click', function() {
+    $('.find').on('click', function() {
       return $.ajax({
         url: "/spots",
         method: "get",
@@ -57,29 +56,41 @@ initialize = function() {
         },
         dataType: "json",
         success: function(data) {
-          return $.getJson('http://jsonp.guffa.com/Proxy.ashx?url=')({
-            url: "https://maps.googleapis.com/maps/api/directions/json",
-            method: 'get',
-            data: {
-              origin: "37.77139265936583,-122.40521395378113",
-              destination: "" + data[1].latitude + "," + data[1].longitude,
-              mode: "walking",
-              key: "AIzaSyAd5T-_NYteKlBbmFHnx5IMH2T5OoJGds4"
-            },
-            jsonpCallback: 'jsonCallback',
-            contentType: 'application/json',
-            dataType: 'jsonp',
-            success: function() {
-              return console.log('Hello Directions');
-            },
-            error: function() {}
-          });
+          console.log("sucess!!!!!");
+          return getCar(data);
         },
         error: function() {
           return alert("Server is broken!");
         }
       });
     });
+    return getCar = function(data) {
+      var calculateRoute, center, directionsDisplay, directionsService;
+      directionsService = new google.maps.DirectionsService();
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      center = new google.maps.LatLng(latitude, longitude);
+      mapOptions = {
+        zoom: 17,
+        center: center
+      };
+      directionsDisplay.setMap(map);
+      calculateRoute = function() {
+        var end, request, start;
+        start = new google.maps.LatLng(map.getCenter().k, map.getCenter().A);
+        end = new google.maps.LatLng(data.latitude, data.longitude);
+        request = {
+          origin: start,
+          destination: end,
+          travelMode: google.maps.TravelMode.WALKING
+        };
+        return directionsService.route(request, function(response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            return console.log(directionsDisplay.setDirections(response));
+          }
+        });
+      };
+      return calculateRoute();
+    };
   };
   if (navigator.geolocation) {
     return navigator.geolocation.getCurrentPosition(startLocation);

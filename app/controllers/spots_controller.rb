@@ -2,10 +2,10 @@ class SpotsController < ApplicationController
   before_action :authenticate_user!
 
   def index 
-    @spots = current_user.spots.all 
+    @spots = current_user.spots.last 
 
     respond_to do |f|
-      f.json { render :json => @spots}
+      f.json { render json: @spots}
     end
   end
 
