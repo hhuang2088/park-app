@@ -76,6 +76,9 @@ initialize = ->
           )
       calculateRoute()
 
+    $('.reset').on('click', ->
+      console.log('reset button clicked'))
+
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition(startLocation)
   else 

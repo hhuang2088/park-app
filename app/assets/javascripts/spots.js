@@ -66,7 +66,7 @@ initialize = function() {
         }
       });
     });
-    return getCar = function(data) {
+    getCar = function(data) {
       var calculateRoute, center, directionsDisplay, directionsService;
       directionsService = new google.maps.DirectionsService();
       directionsDisplay = new google.maps.DirectionsRenderer();
@@ -93,6 +93,9 @@ initialize = function() {
       };
       return calculateRoute();
     };
+    return $('.reset').on('click', function() {
+      return console.log('reset button clicked');
+    });
   };
   if (navigator.geolocation) {
     return navigator.geolocation.getCurrentPosition(startLocation);
