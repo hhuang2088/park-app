@@ -2,9 +2,12 @@
 var initialize;
 
 initialize = function() {
-  var startLocation;
-  startLocation = function(position) {
-    var directionsDisplay, getCar, latitude, longitude, map, mapOptions, marker, markerOverlay;
+  var loadMapFunctions;
+  loadMapFunctions = function(position) {
+    var directionsDisplay, find, getCar, latitude, longitude, map, mapOptions, marker, markerOverlay, park, reset;
+    if (localStorage.getItem("parked") == null) {
+      localStorage.setItem("parked", "false");
+    }
     markerOverlay = null;
     directionsDisplay = null;
     latitude = position.coords.latitude;
@@ -16,12 +19,34 @@ initialize = function() {
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     marker = new google.maps.Marker({
       map: map,
-      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
+      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
+      icon: 'http://www.blaby.gov.uk/EasysiteWeb/getresource.axd?AssetID=9554&type=custom&servicetype=Inline&customSizeId=5'
     });
     google.maps.event.addListener(map, 'center_changed', function() {
       return marker.setPosition(map.getCenter());
     });
-    $('.park').on('click', function() {
+    if (localStorage.getItem("parked") === "true") {
+      marker.icon = "http://www.toyota-global.com/innovation/safety_technology/safety_technology/images/technology_file_icon04.png";
+      $.ajax({
+        url: "/spots",
+        method: "get",
+        dataType: "json",
+        success: function(data) {
+          return markerOverlay = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(data.latitude, data.longitude),
+            animation: google.maps.Animation.DROP,
+            icon: "http://www.infosnacks.com/img/icons/automobiles.png"
+          });
+        },
+        error: function() {
+          return alert("Server is broken!");
+        }
+      });
+      $(".park").hide();
+      $(".find").fadeIn();
+    }
+    park = function() {
       return $.ajax({
         url: "/spots",
         method: "post",
@@ -40,25 +65,21 @@ initialize = function() {
             icon: "http://www.infosnacks.com/img/icons/automobiles.png"
           });
           $(".park").hide();
-          return $(".find").fadeIn();
+          $(".find").fadeIn();
+          localStorage.setItem("parked", "true");
+          return marker.icon = "http://www.toyota-global.com/innovation/safety_technology/safety_technology/images/technology_file_icon04.png";
         },
         error: function() {
           return alert("Server is broken!");
         }
       });
-    });
-    $('.find').on('click', function() {
+    };
+    find = function() {
       return $.ajax({
         url: "/spots",
         method: "get",
-        data: {
-          "spot": {
-            "user_id": 1
-          }
-        },
         dataType: "json",
         success: function(data) {
-          console.log("sucess!!!!!");
           getCar(data);
           $(".find").hide();
           return $(".reset").fadeIn();
@@ -67,7 +88,7 @@ initialize = function() {
           return alert("Server is broken!");
         }
       });
-    });
+    };
     getCar = function(data) {
       var calculateRoute, center, directionsService;
       directionsService = new google.maps.DirectionsService();
@@ -95,16 +116,21 @@ initialize = function() {
       };
       return calculateRoute();
     };
-    return $('.reset').on('click', function() {
+    reset = function() {
       markerOverlay.setMap(null);
       directionsDisplay.setMap(null);
       map.setZoom(17);
       $('.reset').hide();
-      return $('.park').fadeIn();
-    });
+      $('.park').fadeIn();
+      marker.icon = "http://www.blaby.gov.uk/EasysiteWeb/getresource.axd?AssetID=9554&type=custom&servicetype=Inline&customSizeId=5";
+      return localStorage.setItem("parked", "false");
+    };
+    $('.park').on('click', park);
+    $('.find').on('click', find);
+    return $('.reset').on('click', reset);
   };
   if (navigator.geolocation) {
-    return navigator.geolocation.getCurrentPosition(startLocation);
+    return navigator.geolocation.getCurrentPosition(loadMapFunctions);
   } else {
     return console.log("Browser doesn't support geolocate");
   }
