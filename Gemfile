@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem  'dotenv-rails'
 gem 'rails', '4.1.1'
 
 gem 'devise'
