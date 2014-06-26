@@ -20,13 +20,13 @@ initialize = function() {
     marker = new google.maps.Marker({
       map: map,
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
-      icon: '/assets/parking.png'
+      icon: 'parking-18465d8b55eaef812eda3e6a0d8c69c5.png'
     });
     google.maps.event.addListener(map, 'center_changed', function() {
       return marker.setPosition(map.getCenter());
     });
     if (localStorage.getItem("parked") === "true") {
-      marker.icon = "/assets/pedestrian.png";
+      marker.icon = "pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
       $.ajax({
         url: "/spots",
         method: "get",
@@ -36,7 +36,7 @@ initialize = function() {
             map: map,
             position: new google.maps.LatLng(data.latitude, data.longitude),
             animation: google.maps.Animation.DROP,
-            icon: "/assets/car.png"
+            icon: "car-fc1bd42cc54b3d55023caa25c8b8316d.png "
           });
         },
         error: function() {
@@ -62,12 +62,12 @@ initialize = function() {
             map: map,
             position: new google.maps.LatLng(data.latitude, data.longitude),
             animation: google.maps.Animation.DROP,
-            icon: "/assets/car.png"
+            icon: "car-fc1bd42cc54b3d55023caa25c8b8316d.png "
           });
           $(".park").hide();
           $(".find").fadeIn();
           localStorage.setItem("parked", "true");
-          return marker.icon = "/assets/pedestrian.png";
+          return marker.icon = "pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
         },
         error: function() {
           return alert("Server is broken!");
@@ -122,7 +122,7 @@ initialize = function() {
       map.setZoom(17);
       $('.reset').hide();
       $('.park').fadeIn();
-      marker.icon = "/assets/parking.png";
+      marker.icon = "parking-18465d8b55eaef812eda3e6a0d8c69c5.png";
       return localStorage.setItem("parked", "false");
     };
     $('.park').on('click', park);
