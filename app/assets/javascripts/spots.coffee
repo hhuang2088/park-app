@@ -16,7 +16,7 @@ initialize = ->
     marker = new google.maps.Marker(
       map: map
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
-      icon: '/assets/parking.png'
+      icon: 'https://app-wheres-my-car.herokuapp.com/assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png'
       )
 
     google.maps.event.addListener(map, 'center_changed', ->
@@ -24,7 +24,7 @@ initialize = ->
       )
 
     if localStorage.getItem("parked") == "true"
-      marker.icon = "/assets/pedestrian.png"
+      marker.icon = "https://app-wheres-my-car.herokuapp.com/assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png"
       $.ajax
         url : "/spots"
         method: "get"
@@ -34,7 +34,7 @@ initialize = ->
             map: map
             position: new google.maps.LatLng(data.latitude, data.longitude)
             animation: google.maps.Animation.DROP
-            icon: "/assets/car.png"
+            icon: "https://app-wheres-my-car.herokuapp.com/assets/car-fc1bd42cc54b3d55023caa25c8b8316d.png"
             )
         error : ->
           alert "Server is broken!"
@@ -55,12 +55,12 @@ initialize = ->
               map: map
               position: new google.maps.LatLng(data.latitude, data.longitude)
               animation: google.maps.Animation.DROP
-              icon: "/assets/car.png"
+              icon: "https://app-wheres-my-car.herokuapp.com/assets/car-fc1bd42cc54b3d55023caa25c8b8316d.png"
               )
             $(".park").hide()
             $(".find").fadeIn()
             localStorage.setItem("parked", "true")
-            marker.icon = "/assets/pedestrian.png"
+            marker.icon = "https://app-wheres-my-car.herokuapp.com/assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png"
           error: ->
             alert("Server is broken!")
     
@@ -103,7 +103,7 @@ initialize = ->
       map.setZoom(17)
       $('.reset').hide()
       $('.park').fadeIn()
-      marker.icon = "/assets/parking.png"
+      marker.icon = "https://app-wheres-my-car.herokuapp.com/assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png"
       localStorage.setItem("parked", "false")
       
     $('.park').on 'click', park
