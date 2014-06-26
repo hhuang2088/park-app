@@ -20,13 +20,13 @@ initialize = function() {
     marker = new google.maps.Marker({
       map: map,
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
-      icon: 'https://app-wheres-my-car.herokuapp.com/assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png'
+      icon: "https://app-wheres-my-car.herokuapp.com/assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png"
     });
     google.maps.event.addListener(map, 'center_changed', function() {
       return marker.setPosition(map.getCenter());
     });
     if (localStorage.getItem("parked") === "true") {
-      marker.icon = "https://app-wheres-my-car.herokuapp.com/assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
+      marker.icon = "https://app-wheres-my-car.herokuapp.com/assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png"
       $.ajax({
         url: "/spots",
         method: "get",
