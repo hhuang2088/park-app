@@ -1,8 +1,8 @@
 class SpotsController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :gonify
   def index 
-    @spots = current_user.spots.last 
+    @spots = current_user.spots.last
 
     respond_to do |f|
       f.json { render json: @spots}
@@ -11,6 +11,7 @@ class SpotsController < ApplicationController
 
   def new 
     @spot = current_user.spots.new
+    @user_id = current_user.id
   end
 
   def create 
@@ -32,8 +33,13 @@ class SpotsController < ApplicationController
     @spot = current_user.spots.find(params[:id])
   end
 
+  def gonify  
+    gon.current_user = current_user
+  end
+
   private 
     def spot_params 
       params.require(:spot).permit(:longitude, :latitude, :description)
     end
+
 end
