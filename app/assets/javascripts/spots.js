@@ -20,13 +20,13 @@ initialize = function() {
     marker = new google.maps.Marker({
       map: map,
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A),
-      icon: '/assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png'
+      icon: 'assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png'
     });
     google.maps.event.addListener(map, 'center_changed', function() {
       return marker.setPosition(map.getCenter());
     });
     if (localStorage.getItem("parked") === "true") {
-      marker.icon = "/assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
+      marker.icon = "assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
       $.ajax({
         url: "/spots",
         method: "get",
@@ -36,7 +36,7 @@ initialize = function() {
             map: map,
             position: new google.maps.LatLng(data.latitude, data.longitude),
             animation: google.maps.Animation.DROP,
-            icon: "/assets/car-448bdd51c1f7be2600bfd0afe969e4c3.png"
+            icon: "assets/car-448bdd51c1f7be2600bfd0afe969e4c3.png"
           });
         },
         error: function() {
@@ -62,12 +62,12 @@ initialize = function() {
             map: map,
             position: new google.maps.LatLng(data.latitude, data.longitude),
             animation: google.maps.Animation.DROP,
-            icon: "/assets/car-448bdd51c1f7be2600bfd0afe969e4c3.png"
+            icon: "assets/car-448bdd51c1f7be2600bfd0afe969e4c3.png"
           });
           $(".park").hide();
           $(".find").fadeIn();
           localStorage.setItem("parked", "true");
-          return marker.icon = "/assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
+          return marker.icon = "assets/pedestrian-af394414272211f6e0dfe55b44f9ab94.png";
         },
         error: function() {
           return alert("Server is broken!");
@@ -122,7 +122,7 @@ initialize = function() {
       map.setZoom(17);
       $('.reset').hide();
       $('.park').fadeIn();
-      marker.icon = "/assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png";
+      marker.icon = "assets/parking-18465d8b55eaef812eda3e6a0d8c69c5.png";
       return localStorage.setItem("parked", "false");
     };
     $('.park').on('click', park);
