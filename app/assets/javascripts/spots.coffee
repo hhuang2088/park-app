@@ -16,7 +16,7 @@ initialize = ->
     marker = new google.maps.Marker(
       map: map
       position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
-      icon: 'http://www.blaby.gov.uk/EasysiteWeb/getresource.axd?AssetID=9554&type=custom&servicetype=Inline&customSizeId=5'
+      icon: '/assets/parking.png'
       )
 
     google.maps.event.addListener(map, 'center_changed', ->
@@ -24,7 +24,7 @@ initialize = ->
       )
 
     if localStorage.getItem("parked") == "true"
-      marker.icon = "http://www.toyota-global.com/innovation/safety_technology/safety_technology/images/technology_file_icon04.png"
+      marker.icon = "/assets/pedestrian.png"
       $.ajax
         url : "/spots"
         method: "get"
@@ -34,7 +34,7 @@ initialize = ->
             map: map
             position: new google.maps.LatLng(data.latitude, data.longitude)
             animation: google.maps.Animation.DROP
-            icon: "http://www.infosnacks.com/img/icons/automobiles.png"
+            icon: "/assets/car.png"
             )
         error : ->
           alert "Server is broken!"
@@ -55,12 +55,12 @@ initialize = ->
               map: map
               position: new google.maps.LatLng(data.latitude, data.longitude)
               animation: google.maps.Animation.DROP
-              icon: "http://www.infosnacks.com/img/icons/automobiles.png"
+              icon: "/assets/car.png"
               )
             $(".park").hide()
             $(".find").fadeIn()
             localStorage.setItem("parked", "true")
-            marker.icon = "http://www.toyota-global.com/innovation/safety_technology/safety_technology/images/technology_file_icon04.png"
+            marker.icon = "/assets/pedestrian.png"
           error: ->
             alert("Server is broken!")
     
@@ -103,7 +103,7 @@ initialize = ->
       map.setZoom(17)
       $('.reset').hide()
       $('.park').fadeIn()
-      marker.icon = "http://www.blaby.gov.uk/EasysiteWeb/getresource.axd?AssetID=9554&type=custom&servicetype=Inline&customSizeId=5"
+      marker.icon = "/assets/parking.png"
       localStorage.setItem("parked", "false")
       
     $('.park').on 'click', park
