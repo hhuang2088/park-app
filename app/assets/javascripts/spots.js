@@ -133,7 +133,7 @@ initialize = function() {
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     marker = new google.maps.Marker({
       map: map,
-      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().A)
+      position: new google.maps.LatLng(map.getCenter().k, map.getCenter().B)
     });
     google.maps.event.addListener(map, 'center_changed', function() {
       return marker.setPosition(map.getCenter());
@@ -164,7 +164,7 @@ initialize = function() {
         data: {
           "spot": {
             "latitude": map.getCenter().k,
-            "longitude": map.getCenter().A
+            "longitude": map.getCenter().B
           }
         },
         dataType: "json",
@@ -210,7 +210,7 @@ initialize = function() {
       directionsDisplay.setMap(map);
       calculateRoute = function() {
         var end, request, start;
-        start = new google.maps.LatLng(map.getCenter().k, map.getCenter().A);
+        start = new google.maps.LatLng(map.getCenter().k, map.getCenter().B);
         end = new google.maps.LatLng(data.latitude, data.longitude);
         request = {
           origin: start,
