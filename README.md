@@ -2,7 +2,8 @@
 
 <h2>Overview</h2>
 <p>This is a single-page-app that helps keeps track of where the user parked his car, and provides directions back to that parking spot whenever the user chooses to do so.</p>
-<p>In it's current iteration, the app picks up on the user's current GPS location and centers the map at the User's location. THe app can then save the user's location by storing the longitude and latitude of where the map is centered. By saving a parking spot, the app creates a creates a save state using localStorage. This enables the user to turn off the app, and open it up again to get directions back to the parking spot without worry of the app losing the saved parking spot</p>
+<p>In it's current iteration, the app picks up on the user's current GPS location and centers the map at the user's location. The app can then save the user's location by storing the longitude and latitude of where the map is centered. While saving a parking spot to the database, the app also creates a save state using localStorage. This enables the user to turn off the app, and open it up again to get directions back to the parking spot without worry of the app "forgetting" that the user still has a parked spot that needs to be navigated back to.</p>
+<p>The map scrolling function is inspired from Lyft's passenger app. The intention is to create a an experience for mobile users such that they can save their parking spots accurately.</p>
 
 <h2>Gems Used</h2>
 <ul>
