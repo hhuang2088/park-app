@@ -12,100 +12,114 @@ initialize = ->
       zoom: 17
       styles: [
                 {
-                  featureType: "water"
-                  stylers: [color: "#021019"]
-                }
-                {
                   featureType: "landscape"
-                  stylers: [color: "#08304b"]
+                  stylers: [
+                    {
+                      saturation: -100
+                    }
+                    {
+                      lightness: 65
+                    }
+                    {
+                      visibility: "on"
+                    }
+                  ]
                 }
                 {
                   featureType: "poi"
-                  elementType: "geometry"
                   stylers: [
                     {
-                      color: "#0c4152"
+                      saturation: -100
                     }
                     {
-                      lightness: 5
+                      lightness: 51
+                    }
+                    {
+                      visibility: "simplified"
                     }
                   ]
                 }
                 {
                   featureType: "road.highway"
-                  elementType: "geometry.fill"
-                  stylers: [color: "#000000"]
-                }
-                {
-                  featureType: "road.highway"
-                  elementType: "geometry.stroke"
                   stylers: [
                     {
-                      color: "#0b434f"
+                      saturation: -100
                     }
                     {
-                      lightness: 25
+                      visibility: "simplified"
                     }
                   ]
                 }
                 {
                   featureType: "road.arterial"
-                  elementType: "geometry.fill"
-                  stylers: [color: "#000000"]
-                }
-                {
-                  featureType: "road.arterial"
-                  elementType: "geometry.stroke"
                   stylers: [
                     {
-                      color: "#0b3d51"
+                      saturation: -100
                     }
                     {
-                      lightness: 16
+                      lightness: 30
+                    }
+                    {
+                      visibility: "on"
                     }
                   ]
                 }
                 {
                   featureType: "road.local"
-                  elementType: "geometry"
-                  stylers: [color: "#000000"]
-                }
-                {
-                  elementType: "labels.text.fill"
-                  stylers: [color: "#ffffff"]
-                }
-                {
-                  elementType: "labels.text.stroke"
                   stylers: [
                     {
-                      color: "#000000"
+                      saturation: -100
                     }
                     {
-                      lightness: 13
+                      lightness: 40
+                    }
+                    {
+                      visibility: "on"
                     }
                   ]
                 }
                 {
                   featureType: "transit"
-                  stylers: [color: "#146474"]
-                }
-                {
-                  featureType: "administrative"
-                  elementType: "geometry.fill"
-                  stylers: [color: "#000000"]
-                }
-                {
-                  featureType: "administrative"
-                  elementType: "geometry.stroke"
                   stylers: [
                     {
-                      color: "#144b53"
+                      saturation: -100
                     }
                     {
-                      lightness: 14
+                      visibility: "simplified"
+                    }
+                  ]
+                }
+                {
+                  featureType: "administrative.province"
+                  stylers: [visibility: "off"]
+                }
+                {
+                  featureType: "water"
+                  elementType: "labels"
+                  stylers: [
+                    {
+                      visibility: "on"
                     }
                     {
-                      weight: 1.4
+                      lightness: -25
+                    }
+                    {
+                      saturation: -100
+                    }
+                  ]
+                }
+                {
+                  featureType: "water"
+                  elementType: "geometry"
+                  stylers: [
+                    {
+                      hue: "#ffff00"
+                    }
+                    {
+                      lightness: -25
+                    }
+                    {
+                      saturation: -97
                     }
                   ]
                 }
